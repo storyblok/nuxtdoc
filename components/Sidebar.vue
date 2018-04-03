@@ -17,7 +17,7 @@
 
 <style lang='scss'>
 .sidebar {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 61px;
   left: 0;

@@ -29,6 +29,7 @@
   padding: 10px 60px;
   position: relative;
   z-index: 100;
+  height: 60px;
   line-height: 40px;
 
   background-color: rgba(255,255,255,0.4);
@@ -37,8 +38,9 @@
 
   display: flex;
   justify-content: space-between;
+  box-sizing: border-box;
 
-  & .docs {
+  .docs & {
     position: fixed;
     width: 100%;
     top: 0;
