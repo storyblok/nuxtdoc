@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang='scss'>
+<style>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -20,11 +20,13 @@ body {
   margin: 0;
 }
 
-a {
+a { 
+  color: #34495e;
   text-decoration: none;
   border-bottom: 2px solid transparent;
-  &:hover {
-    border-bottom: 2px solid #42b983;
-  }
+}
+
+a:hover {
+  border-bottom: 2px solid #42b983;
 }
 </style>

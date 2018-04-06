@@ -30,11 +30,18 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .menu {
   margin: 0 auto;
   max-width: 600px;
+
+  ul, li {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+  }
 }
+
 .menu__inner {
   padding: 40px 20px;
 }
@@ -44,16 +51,10 @@ export default {
   font-weight: 600;
 }
 
-a {
+.menu__link {
   display: block;
   padding: 10px 0px 5px 0px;
   border: 0px;
   color: #34495e;
-}
-
-ul, li {
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
 }
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div class="sidebar">
     <div class="sidebar__inner" v-bind:key="version.item.id" v-for="version in $store.state.sitemap">
-      {{version.item.name}}
       <nav class="sidebar__category" v-bind:key="category.item.id" v-for="category in version.children">
         <nuxt-link class="sidebar__link sidebar__link--category" :to="'/' + category.item.slug">{{category.item.name}}</nuxt-link>
         

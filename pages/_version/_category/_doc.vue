@@ -15,6 +15,7 @@
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import marked from 'marked'
+import { resizeImages } from '@/plugins/helper'
 
 export default {
   data() {
@@ -25,7 +26,7 @@ export default {
   },
   computed: {
     parsed() {
-      return marked(this.content)
+      return marked(resizeImages(this.content, '600x0'))
     }
   },
   components: {
@@ -74,5 +75,8 @@ export default {
   @media screen and (min-width: 1300px) {
     margin-left: auto;
   }
+  img {
+    max-width: 100%;
+  } 
 }
 </style>

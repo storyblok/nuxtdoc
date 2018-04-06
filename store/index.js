@@ -3,10 +3,14 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     state: {
+      version: 'v1',
       sitemap: {},
       links: {}
     },
     mutations: {
+     SET_VERSION(state, version) {
+      state.version = version
+     },
      async SET_SITEMAP (state, links) {
 
         const generateTree = (parent, items) => {

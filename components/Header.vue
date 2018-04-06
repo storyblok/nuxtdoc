@@ -1,10 +1,10 @@
 <template>
   <header class="header">
-    <a class="header__logo" href="">Logo</a>
+    <nuxt-link class="header__logo" to="/">Logo</nuxt-link>
     <nav>
       <ul class="header__nav">
         <li class="header__nav-item">
-          <a href="">Guide</a>
+          <nuxt-link to="/v1/guide">Guide</nuxt-link>
         </li>
         <li class="header__nav-item header__nav-item--mobile">
           <nuxt-link to="/v1/menu">Menu</nuxt-link>
@@ -51,5 +51,12 @@
 .header__nav-item {
   display: inline-block;
   margin: 0 0.6em;
+}
+
+.header__nav-item--mobile {
+  display: inline-block;
+  @media screen and (min-width: 835px) {
+    display: none;
+  }
 }
 </style>

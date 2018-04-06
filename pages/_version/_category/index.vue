@@ -81,6 +81,15 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   padding: 40px;
-  padding-left: 50px;
+  margin-left: auto;
+  @media screen and (min-width: 835px) {
+    margin-left: 310px;
+  }
+  @media screen and (min-width: 1300px) {
+    margin-left: auto;
+  }
+  img {
+    max-width: 100%;
+  }
 }
 </style>
