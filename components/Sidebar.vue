@@ -1,28 +1,31 @@
 <template>
   <div class="sidebar">
-    <nav class="sidebar__inner" v-bind:key="version" v-for="version in $store.state.sitemap">
+    <div class="sidebar__inner" v-bind:key="version.item.id" v-for="version in $store.state.sitemap">
       {{version.item.name}}
-      <ul>
-        <li v-bind:key="category" v-for="category in version.children">
-          <nuxt-link :to="'/' + category.item.slug">{{category.item.name}}</nuxt-link>
-          <ul>
-            <li v-bind:key="doc" v-for="doc in category.children">
-              <nuxt-link :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
-              <ul v-if="doc.item.slug == currentPage && subnav.length > 0">
-                <li v-bind:key="navitem.id" v-for="navitem in subnav">
-                  <a :href="navitem.id">{{navitem.text}}</a>
-                  <ul v-if="navitem.children.length > 0">
-                    <li v-bind:key="child.id" v-for="child in navitem.children">
-                      <a :href="child.id">{{child.text}}</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+      <nav class="sidebar__category" v-bind:key="category.item.id" v-for="category in version.children">
+        <nuxt-link class="sidebar__link sidebar__link--category" :to="'/' + category.item.slug">{{category.item.name}}</nuxt-link>
+        
+        <ul class="sidebar__docs">
+          <li v-bind:key="doc.item.id" v-for="doc in category.children">
+            <nuxt-link class="sidebar__link" :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
+            
+            <ul class="sidebar__subdocs" v-if="doc.item.slug == currentPage && subnav.length > 0">
+              <li v-bind:key="navitem.id" v-for="navitem in subnav">
+                
+                <nuxt-link class="sidebar__link" :to="navitem.id">{{navitem.text}}</nuxt-link>
+                <ul v-if="navitem.children.length > 0">
+                  <li v-bind:key="child.id" v-for="child in navitem.children">
+                    <nuxt-link class="sidebar__link" :to="child.id">{{child.text}}</nuxt-link>
+                  </li>
+                </ul>
+
+              </li>
+            </ul>
+
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -61,7 +64,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .sidebar {
   position: fixed;
   z-index: 10;
@@ -74,22 +77,53 @@ export default {
   -ms-overflow-style: none;
 }
 
+.sidebar__link {
+  display: inline-block;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+  color: #7f8c8d;
+
+  &:visited {
+    color: initial;
+  }
+
+  &.nuxt-link-active {
+    font-weight: 600;
+    color: #42b983;
+  }
+
+  &.sidebar__link--category {
+    color: initial;
+    font-weight: 600;
+  }
+}
+
+.sidebar__category {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0px;
+  margin-bottom: 10px;
+}
+
 .sidebar__inner {
   width: 260px;
   padding: 40px 20px 60px 60px;
-
-  > ul {
-    padding: 0px;
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-  }
-
-  li {
-    list-style-type: none;
-    display: block;
-  }
 }
+
+.sidebar__docs {
+  margin: 0px;
+  padding-left: 0px;
+}
+
+.sidebar__subdocs {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.80em;
+}
+
+li {
+  list-style-type: none;
+  display: block;
+}
+
 </style>

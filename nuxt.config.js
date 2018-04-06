@@ -20,6 +20,24 @@ module.exports = {
   /*
   ** Build configuration
   */
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        let position = {}
+        if (to.matched.length < 2) {
+          position = { x: 0, y: 0, offset: { x: 0, y: 80 } }
+        } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
+          position = { x: 0, y: 0 }
+        }
+        if (to.hash) {
+          position = { selector: to.hash, offset: { x: 0, y: 80 } }
+        }
+        return position
+      }
+    }
+  },
   modules: [
     ['storyblok-nuxt', {accessToken: 'R5hUgUB9PGoRq2XwtYw14wtt', cacheProvider: 'memory'}]
   ],
