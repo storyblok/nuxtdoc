@@ -1,0 +1,84 @@
+<template>
+  <div class="docs">
+    <Header/>
+    <Sidebar :currentPage="currentPage" />
+    <article class="docs__content">
+      <h1 class="docs__title">{{title}}</h1>
+      <div v-bind:key="doc" v-for="doc in docs">
+        <h2><nuxt-link :to="'/' + doc.full_slug">{{doc.name}}</nuxt-link></h2>
+        <div v-html="markdown(doc.content.summary)"></div>
+      </div>
+    </article>
+  </div>
+</template>
+
+<script>
+import Header from '@/components/Header'
+import Sidebar from '@/components/Sidebar'
+import marked from 'marked'
+
+export default {
+  data() {
+    return {
+      currentPage: '',
+      docs: []
+    }
+  },
+  computed: {
+    title() {
+      let title = ''
+      let links = this.$store.state.links
+      Object.keys(links).forEach((key) => {
+        if (links[key].slug == this.currentPage) {
+          title = links[key].name
+        }
+      })
+      return title
+    }
+  },
+  components: {
+    Header,
+    Sidebar
+  },
+  mounted () {
+    if (this.$storyblok.inEditor) {
+      this.$storyblok.init()
+      this.$storyblok.on('change', () => {
+        location.reload(true)
+      })
+    }
+  },
+  methods: {
+    markdown(string) {
+      return marked(string || '')
+    }
+  },
+  async fetch (context) {
+    await context.store.dispatch('GET_SITEMAP', context)
+  },
+  async asyncData (context) {
+    const { data } = await context.app.$storyapi.get(`cdn/stories/`, { 
+        starts_with: `${context.params.version}/${context.params.category}/`,
+        version: 'draft' })
+    return { docs: data.stories, 
+             currentPage: `${context.params.version}/${context.params.category}` }
+  }
+}
+</script>
+
+<style lang='scss'>
+.docs {
+  margin-top: 61px;
+}
+
+.docs__title {
+  margin-top: 0px;
+}
+
+.docs__content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  padding-left: 50px;
+}
+</style>

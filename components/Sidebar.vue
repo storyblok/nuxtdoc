@@ -1,15 +1,21 @@
 <template>
   <div class="sidebar">
-    <nav class="sidebar__inner">
+    <nav class="sidebar__inner" v-bind:key="version" v-for="version in $store.state.sitemap">
+      {{version.item.name}}
       <ul>
-        <li>
-          <a href="">Page Title (h1)</a>
-          <ul v-if="subnav.length > 0">
-            <li v-bind:key="navitem.id" v-for="navitem in subnav">
-              <a :href="navitem.id">{{navitem.text}}</a>
-              <ul v-if="navitem.children.length > 0">
-                <li v-bind:key="child.id" v-for="child in navitem.children">
-                  <a :href="child.id">{{child.text}}</a>
+        <li v-bind:key="category" v-for="category in version.children">
+          <nuxt-link :to="'/' + category.item.slug">{{category.item.name}}</nuxt-link>
+          <ul>
+            <li v-bind:key="doc" v-for="doc in category.children">
+              <nuxt-link :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
+              <ul v-if="doc.item.slug == currentPage && subnav.length > 0">
+                <li v-bind:key="navitem.id" v-for="navitem in subnav">
+                  <a :href="navitem.id">{{navitem.text}}</a>
+                  <ul v-if="navitem.children.length > 0">
+                    <li v-bind:key="child.id" v-for="child in navitem.children">
+                      <a :href="child.id">{{child.text}}</a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
@@ -24,7 +30,12 @@
 import cheerio from 'cheerio'
 
 export default {
-  props: [ 'pageNavigation' ],
+  props: [ 'currentPage', 'pageNavigation' ],
+  data() {
+    return {
+      stories: []
+    }
+  },
   computed: {
     subnav() {
       const $ = cheerio.load(this.pageNavigation)

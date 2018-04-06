@@ -1,8 +1,8 @@
 <template>
   <div class="docs">
     <Header/>
-    <Sidebar :currentPage="slug" :pageNavigation="parsed"/>
-    <article class="docs__content">
+    <Sidebar :currentPage="full_slug" :pageNavigation="parsed"/>
+    <article class="docs__content" v-editable="blok">
       <h1 class="docs__title" :id="slug">{{title}}</h1>
       <div v-html="parsed"></div>
     </article>
@@ -30,19 +30,31 @@ export default {
     Header,
     Sidebar
   },
+  mounted () {
+    if (this.$storyblok.inEditor) {
+      this.$storyblok.init()
+      this.$storyblok.on('change', () => {
+        location.reload(true)
+      })
+    }
+  },
+  async fetch (context) {
+    await context.store.dispatch('GET_SITEMAP', context)
+  },
   async asyncData (context) {
-    let { data } = await context.app.$storyapi.get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
+    const { data } = await context.app.$storyapi.get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
     return { title: data.story.name, 
              slug: data.story.slug,
              full_slug: data.story.full_slug,
-             content: data.story.content.content }
+             content: data.story.content.content,
+             blok: data.story.content }
   }
 }
 </script>
 
-<style>
-.doc {
-  padding-top: 60px;
+<style lang='scss'>
+.docs {
+  margin-top: 61px;
 }
 
 .docs__title {
@@ -53,7 +65,9 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   padding: 40px;
-  padding-left: 50px;
-  margin-top: 61px;
+  margin-left: 310px;
+  @media screen and (min-width: 1300px) {
+    margin-left: auto;
+  }
 }
 </style>
