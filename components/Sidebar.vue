@@ -4,9 +4,14 @@
       <ul>
         <li>
           <a href="">Page Title (h1)</a>
-          <ul>
-            <li>
-              <a href="">Some h2 Headline text</a>
+          <ul v-if="subnav.length > 0">
+            <li v-bind:key="navitem.id" v-for="navitem in subnav">
+              <a :href="navitem.id">{{navitem.text}}</a>
+              <ul v-if="navitem.children.length > 0">
+                <li v-bind:key="child.id" v-for="child in navitem.children">
+                  <a :href="child.id">{{child.text}}</a>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>
@@ -14,6 +19,36 @@
     </nav>
   </div>
 </template>
+
+<script>
+import cheerio from 'cheerio'
+
+export default {
+  props: [ 'content' ],
+  computed: {
+    subnav() {
+      const $ = cheerio.load(this.content)
+      let pageNav = []
+      $('h2, h3').each((i, elem) => {
+        let $elem = $(elem)
+        if ($elem[0].name == 'h2') {
+          pageNav.push({
+            id: `#${$elem.attr('id')}`,
+            text: $elem.text(),
+            children: []
+          })
+        } else {
+          pageNav[pageNav.length - 1].children.push({
+            id: `#${$elem.attr('id')}`,
+            text: $elem.text(),
+          })
+        }
+      })
+      return pageNav
+    }
+  }
+}
+</script>
 
 <style lang='scss'>
 .sidebar {
