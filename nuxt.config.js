@@ -38,6 +38,9 @@ module.exports = {
       }
     }
   },
+  plugins: [
+    '@/plugins/components'
+  ],
   modules: [
     ['storyblok-nuxt', {accessToken: 'R5hUgUB9PGoRq2XwtYw14wtt', cacheProvider: 'memory'}]
   ],

@@ -1,11 +1,12 @@
 <template>
   <header class="header">
-    <nuxt-link class="header__logo" to="/">Logo</nuxt-link>
+    <nuxt-link class="header__logo" to="/">
+      <img src="http://a.storyblok.com/f/43760/256x189/97266889fd/nuxt.svg" alt="NuxtJs">
+      <img src="http://a.storyblok.com/f/43760/187x217/ff47150545/storyblok.svg" alt="Storyblok">
+      <img src="http://a.storyblok.com/f/43760/256x256/d78f9d9b8c/netlify.svg" alt="Netlify">
+    </nuxt-link>
     <nav>
       <ul class="header__nav">
-        <li class="header__nav-item">
-          <nuxt-link to="/v1/guide">Guide</nuxt-link>
-        </li>
         <li class="header__nav-item header__nav-item--mobile">
           <nuxt-link to="/v1/menu">Menu</nuxt-link>
         </li>
@@ -39,6 +40,14 @@
     position: fixed;
     width: 100%;
     top: 0;
+  }
+}
+
+.header__logo {
+  img {
+    height: 30px;
+    padding-right: 10px;
+    padding-top: 5px;
   }
 }
 
