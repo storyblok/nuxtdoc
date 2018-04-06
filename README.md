@@ -4,6 +4,8 @@
 
 ## Preview
 
+Netlify Link: http://hopeful-hoover-d87dd1.netlify.com
+
 ### Startpage
 
 ![Startpage](https://a.storyblok.com/f/43760/2554x1882/3a15b285e1/nuxtdoc-preview.jpg)
@@ -28,7 +30,7 @@
 - [x] Doc Category Overview
 - [x] Doc Detail Page
 - [x] Deep Links
-- [] Netlify Deployment
+- [x] Netlify Deployment
 - [] Real Documentation as Example
 - [] more more more
 

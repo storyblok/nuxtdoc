@@ -1,3 +1,5 @@
+const axios = require('axios')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -44,6 +46,19 @@ module.exports = {
   modules: [
     ['storyblok-nuxt', {accessToken: 'R5hUgUB9PGoRq2XwtYw14wtt', cacheProvider: 'memory'}]
   ],
+  generate: {
+    routes: function () {
+      return axios.get('https://api.storyblok.com/v1/cdn/links?token=R5hUgUB9PGoRq2XwtYw14wtt&version=draft').then((res) => {
+        let routes = []
+        Object.keys(res.data.links).forEach((key) => {
+          if (res.data.links[key].slug != 'home') {
+            routes.push('/' + res.data.links[key].slug)
+          }
+        })
+        return routes
+      })
+    }
+  },
   build: {
     /*
     ** Run ESLint on save

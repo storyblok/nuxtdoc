@@ -19,7 +19,6 @@ export default {
   },
   async asyncData (context) {
     const { data } = await context.app.$storyapi.get(`cdn/stories/home`, { version: 'draft' })
-    console.log(data);
     return { story: data.story }
   }
 }
