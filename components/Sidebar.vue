@@ -7,7 +7,7 @@
         
         <ul class="sidebar__docs">
           <li v-bind:key="doc.item.id" v-for="doc in category.children">
-            <nuxt-link class="sidebar__link" :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
+            <nuxt-link class="sidebar__link sidebar__link--doc" :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
             
             <ul class="sidebar__subdocs" v-if="doc.item.slug == currentPage && subnav.length > 0">
               <li v-bind:key="navitem.id" v-for="navitem in subnav">
@@ -64,7 +64,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .sidebar {
   position: fixed;
   z-index: 10;
@@ -83,13 +83,13 @@ export default {
   margin-bottom: 2px;
   color: #7f8c8d;
 
-  &:visited {
-    color: initial;
-  }
-
   &.nuxt-link-active {
     font-weight: 600;
     color: #42b983;
+  }
+
+  &.sidebar__link--doc {
+    font-size: 0.85em;
   }
 
   &.sidebar__link--category {
@@ -99,9 +99,7 @@ export default {
 }
 
 .sidebar__category {
-  border-bottom: 1px solid #ccc;
   padding: 10px 0px;
-  margin-bottom: 10px;
 }
 
 .sidebar__inner {
@@ -119,6 +117,9 @@ export default {
   margin: 0;
   padding-left: 20px;
   font-size: 0.80em;
+  .sidebar__link {
+    color: #34495e;
+  }
 }
 
 li {
