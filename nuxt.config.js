@@ -20,6 +20,9 @@ module.exports = {
   /*
   ** Build configuration
   */
+  modules: [
+    ['storyblok-nuxt', {accessToken: 'R5hUgUB9PGoRq2XwtYw14wtt', cacheProvider: 'memory'}]
+  ],
   build: {
     /*
     ** Run ESLint on save

@@ -13,7 +13,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^1.0.0"
+    "nuxt": "^1.0.0",
+    "storyblok-nuxt": "0.0.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

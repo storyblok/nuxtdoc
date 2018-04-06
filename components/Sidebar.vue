@@ -24,10 +24,10 @@
 import cheerio from 'cheerio'
 
 export default {
-  props: [ 'content' ],
+  props: [ 'pageNavigation' ],
   computed: {
     subnav() {
-      const $ = cheerio.load(this.content)
+      const $ = cheerio.load(this.pageNavigation)
       let pageNav = []
       $('h2, h3').each((i, elem) => {
         let $elem = $(elem)
