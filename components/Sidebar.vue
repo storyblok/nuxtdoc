@@ -34,11 +34,6 @@ import cheerio from 'cheerio'
 
 export default {
   props: [ 'currentPage', 'pageNavigation' ],
-  data() {
-    return {
-      stories: []
-    }
-  },
   computed: {
     subnav() {
       const $ = cheerio.load(this.pageNavigation)
@@ -75,6 +70,11 @@ export default {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
+  
+  display: none;
+  @media screen and (min-width: 835px) {
+    display: block;
+  }
 }
 
 .sidebar__link {

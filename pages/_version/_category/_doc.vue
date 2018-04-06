@@ -1,11 +1,13 @@
 <template>
   <div class="docs">
-    <Header/>
-    <Sidebar :currentPage="full_slug" :pageNavigation="parsed"/>
     <article class="docs__content" v-editable="blok">
       <h1 class="docs__title" :id="slug">{{title}}</h1>
       <div v-html="parsed"></div>
     </article>
+
+    <Header/>
+    <Sidebar :currentPage="full_slug" :pageNavigation="parsed"/>
+    
   </div>
 </template>
 
@@ -65,7 +67,10 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   padding: 40px;
-  margin-left: 310px;
+  margin-left: auto;
+  @media screen and (min-width: 835px) {
+    margin-left: 310px;
+  }
   @media screen and (min-width: 1300px) {
     margin-left: auto;
   }

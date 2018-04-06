@@ -1,7 +1,5 @@
 <template>
   <div class="docs">
-    <Header/>
-    <Sidebar :currentPage="currentPage" />
     <article class="docs__content">
       <h1 class="docs__title">{{title}}</h1>
       <div v-bind:key="doc" v-for="doc in docs">
@@ -9,6 +7,10 @@
         <div v-html="markdown(doc.content.summary)"></div>
       </div>
     </article>
+
+    <Header/>
+    <Sidebar :currentPage="currentPage" />
+  
   </div>
 </template>
 

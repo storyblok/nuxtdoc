@@ -6,17 +6,8 @@
         <li class="header__nav-item">
           <a href="">Guide</a>
         </li>
-        <li class="header__nav-item">
-          <a href="">API</a>
-        </li>
-        <li class="header__nav-item">
-          <a href="">Style Guide</a>
-        </li>
-        <li class="header__nav-item">
-          <a href="">Examples</a>
-        </li>
-        <li class="header__nav-item">
-          <a href="">Cookbook</a>
+        <li class="header__nav-item header__nav-item--mobile">
+          <nuxt-link to="/v1/menu">Menu</nuxt-link>
         </li>
       </ul>
     </nav>
@@ -26,7 +17,7 @@
 <style lang='scss'>
 .header {
   background-color: #fff;
-  padding: 10px 60px;
+  padding: 10px 40px;
   position: relative;
   z-index: 100;
   height: 60px;
@@ -39,6 +30,10 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
+
+  @media screen and (min-width: 725px) {
+    padding: 10px 60px;
+  }
 
   .docs & {
     position: fixed;
