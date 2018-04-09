@@ -114,10 +114,13 @@ export default {
 .sidebar__subdocs {
   list-style-type: none;
   margin: 0;
-  padding-left: 20px;
+  padding-left: 10px;
   font-size: 0.80em;
   .sidebar__link {
     color: #34495e;
+  }
+  ul {
+    padding-left: 10px;
   }
 }
 
