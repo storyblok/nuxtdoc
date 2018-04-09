@@ -17,7 +17,7 @@ Netlify Link: http://hopeful-hoover-d87dd1.netlify.com
 ![Doc Detail Page](https://a.storyblok.com/f/43760/2250x1512/ca4802ed08/document-with-submenu.jpg)
 
 
-## Features
+## Features / Todo
 
 - [x] Basic NuxtJS Setup
 - [x] Basic Startpage Setup
@@ -32,6 +32,14 @@ Netlify Link: http://hopeful-hoover-d87dd1.netlify.com
 - [x] Deep Links
 - [x] Netlify Deployment
 - [] Real Documentation as Example
+- [] Seed Components
+- [] Seed Script
+- [] Getting Started Guide
+- [] Highlight JS
+- [] More general styles
+- [] Use variable in styles
+- [] Add images to documentation
+- [] Create getting started video
 - [] more more more
 
 
