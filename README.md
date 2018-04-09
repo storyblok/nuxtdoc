@@ -1,4 +1,4 @@
-# NuxtDoc
+# NuxtDoc [WIP]
 
 > A setup to build beautiful documentation with Nuxt and Storyblok deployed on Netlify for everyone
 
@@ -31,15 +31,17 @@ Netlify Link: http://hopeful-hoover-d87dd1.netlify.com
 - [x] Doc Detail Page
 - [x] Deep Links
 - [x] Netlify Deployment
+- [x] Seed Components
+- [x] Seed Script
+- [x] Automatically optimize images
+- [x] Getting Started Guide
 - [] Real Documentation as Example
-- [] Seed Components
-- [] Seed Script
-- [] Getting Started Guide
 - [] Highlight JS
 - [] More general styles
 - [] Use variable in styles
-- [] Add images to documentation
+- [] Add images to the real documentation
 - [] Create getting started video
+- [] Multi Version support
 - [] more more more
 
 
