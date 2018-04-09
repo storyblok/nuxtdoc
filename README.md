@@ -2,24 +2,19 @@
 
 > A setup to build beautiful documentation with Nuxt and Storyblok deployed on Netlify for everyone
 
-## Preview
+## Documentation and Getting Started
 
-Netlify Link: http://hopeful-hoover-d87dd1.netlify.com
+### Full Documentation
 
-## Getting Started
+Documentation: http://hopeful-hoover-d87dd1.netlify.com
+
+### Getting Started
 
 The Getting Started Guide: http://hopeful-hoover-d87dd1.netlify.com/v1/guide/getting-started
 
 ### Startpage
 
-![Startpage](https://a.storyblok.com/f/43760/2554x1882/3a15b285e1/nuxtdoc-preview.jpg)
-
-### Doc Category Overview
-![Category Overview](https://a.storyblok.com/f/43760/2256x1250/fc22cf65a9/categoryoverview.jpg)
-
-### Doc Detail Page
-![Doc Detail Page](https://a.storyblok.com/f/43760/2250x1512/ca4802ed08/document-with-submenu.jpg)
-
+![Startpage](https://a.storyblok.com/f/43760/2622x1582/4a89ba76f0/nuxtdoc-startpage.jpg)
 
 ## Features / Todo
 
