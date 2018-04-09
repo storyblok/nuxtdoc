@@ -54,7 +54,7 @@ export default {
 .menu__link {
   display: block;
   padding: 10px 0px 5px 0px;
-  border: 0px;
+  border-color: #fff;
   color: #34495e;
 }
 </style>

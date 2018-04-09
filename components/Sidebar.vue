@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .sidebar {
   position: fixed;
   z-index: 10;
@@ -72,6 +72,11 @@ export default {
   
   display: none;
   @media screen and (min-width: 835px) {
+    display: block;
+  }
+
+  li {
+    list-style-type: none;
     display: block;
   }
 }
@@ -122,11 +127,6 @@ export default {
   ul {
     padding-left: 10px;
   }
-}
-
-li {
-  list-style-type: none;
-  display: block;
 }
 
 </style>

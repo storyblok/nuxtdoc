@@ -119,6 +119,10 @@ export default {
     }
   }
 
+  li {
+    list-style: initial;
+  }
+
   pre {
     display: block;
     padding: 20px;

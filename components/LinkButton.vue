@@ -45,7 +45,7 @@ export default {
   transition: transform 200ms ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  &:hover {
+  &:hover, &:focus {
     text-decoration: none;
     background-color: lighten(#00b09f, 5%);
     transform: translateY(-1px);
@@ -55,7 +55,7 @@ export default {
 
 .link-button--dark {
   background: #24292e;
-  &:hover {
+  &:hover, &:focus {
     background-color: lighten(#24292e, 5%);
   }
 }

@@ -4,7 +4,7 @@
       <h1 class="home-teaser__title">{{blok.title}}</h1>
       <h2 class="home-teaser__subtitle">{{blok.subtitle}}</h2>
       <link-button :to="'/' + blok.button_link.cached_url" :text="blok.button_text"/>
-      <link-button to="https://github.com/dominikangerer/nuxtdoc" text="Github" theme="dark"/>
+      <link-button to="https://github.com/storyblok/nuxtdoc" text="Github" theme="dark"/>
     </div>
   </div>
 </template>
