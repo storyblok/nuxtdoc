@@ -34,11 +34,13 @@ The Getting Started Guide: http://hopeful-hoover-d87dd1.netlify.com/v1/guide/get
 - [x] Seed Script
 - [x] Automatically optimize images
 - [x] Getting Started Guide
-- [] Real Documentation as Example
+- [x] Real Documentation as Example
+- [x] Add images to the real documentation
+- [x] Feature List
+- [x] Better Teaser Background Image
 - [] Highlight JS
 - [] More general styles
 - [] Use variable in styles
-- [] Add images to the real documentation
 - [] Create getting started video
 - [] Multi Version support
 - [] more more more
