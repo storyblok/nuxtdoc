@@ -24,7 +24,7 @@ export default {
 .home-teaser {
   background-size: cover;
   background-position: bottom;
-  height: 500px;
+  height: 400px;
   text-align: left;
   padding-top: 60px;
   background-repeat: no-repeat;
