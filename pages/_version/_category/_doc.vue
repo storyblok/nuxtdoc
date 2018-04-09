@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     parsed() {
-      return marked(resizeImages(this.content, '600x0'))
+      return marked(resizeImages(this.content, '1000x0'))
     }
   },
   components: {
