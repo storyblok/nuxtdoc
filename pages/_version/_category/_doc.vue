@@ -110,18 +110,14 @@ export default {
   p {
     line-height: 1.5;
     code {
-      display: inline-block;
+      display: inline;
       background: #f5f5f5;
       border-radius: 4px;
       border: 1px solid #d8d8d8;
-      padding: 0px 5px;
       font-size: 90%;
     }
   }
 
-  li {
-    list-style: initial;
-  }
 
   pre {
     display: block;
@@ -143,6 +139,10 @@ export default {
       padding: 15px;
       text-align: left;
     }
+  }
+
+  iframe {
+    max-width: 100%;
   }
 }
 </style>

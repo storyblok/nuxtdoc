@@ -12,7 +12,6 @@ const createStore = () => {
       state.version = version
      },
      async SET_SITEMAP (state, links) {
-
         const generateTree = (parent, items) => {
           let node = {}
           if (typeof items[parent] !== 'undefined') {
