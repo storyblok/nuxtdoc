@@ -26,7 +26,14 @@ if (credsNetrc.hasOwnProperty(host)) {
     'email': credsNetrc[host]['login'],
     'token': credsNetrc[host]['password']
   }
+  
+  startSeed()
 
+} else {
+  console.error('Seed: You\'re not logged in. Use the command `storyblok login` to login')
+}
+
+async function startSeed() {
   const instance = axios.create({
     baseURL: `https://mapi.storyblok.com/v1/spaces/${space}`,
     headers: {
@@ -34,53 +41,39 @@ if (credsNetrc.hasOwnProperty(host)) {
     }
   })
 
-  // Verison Folder: create the basic folder structure
-  instance.post('/stories', version_folder).then((res_1) => {
-    console.log('Seed: Version Folder created')
-    category_folder.story.parent_id = res_1.data.story.id
-    
-    // Category Folder: create the basic folder structure
-    return instance.post('/stories', category_folder).then((res_2) => {
-      console.log('Seed: Category Folder created')
+  // 1. Verison Folder: create the basic folder structure
+  let res_1 = await instance.post(`/stories`, version_folder).catch((error) => console.error(error))
+  console.log('Seed: Version Folder created')
+  category_folder.story.parent_id = res_1.data.story.id
+  
 
-      // Create First Entry to showcase the setup
-      first_entry.story.parent_id = res_2.data.story.id
-      return instance.post('/stories', first_entry).then((res_3) => {
-        console.log('Seed: First Entry created')
+  // 2. Category Folder: create the basic folder structure
+  let res_2 = await instance.post('/stories', category_folder).catch((error) => console.error(error))
+  console.log('Seed: Category Folder created')
 
-        // Fill Home content entry with base data from NuxtDoc
-        return instance.get('/stories/', { page: 1 }).then((res_4) => {
-          let homeStory = res_4.data.stories.find((story) => {
-            return story.slug == 'home';
-          });
+  // 3. Create First Entry to showcase the setup
+  first_entry.story.parent_id = res_2.data.story.id
+  let res_3 = await instance.post('/stories', first_entry).catch((error) => console.error(error))
+  console.log('Seed: First Entry created')
 
-          homeStory.path = '/'
-          homeStory.content = {"body":[{"_uid":"43bccb44-f03b-4f06-8515-06b4025bc3d5","title":"NuxtDoc","subtitle":"Create your documentation with NuxtJS + Storyblok","component":"teaser","button_link":{"id":"63f075f9-5f02-4805-a3af-2cb84f5b7aeb","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"button_text":"Get me to the Docs","background_image":"//a.storyblok.com/f/43760/2000x500/3afb2b33d7/nuxtdoc-background.svg"},{"columns":[{"link":{"id":"ef631e21-b771-49f4-a486-69efff85a643","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"logo":"//a.storyblok.com/f/43760/256x189/97266889fd/nuxt.svg","name":"Built with Nuxt","component":"feature","link_text":"Why Nuxt?","description":"Nuxt.js is a framework for creating Universal Vue.js Applications. It presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable."},{"link":{"id":"4a971857-f1be-4708-b2ae-e401c1f30445","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"logo":"//a.storyblok.com/f/43760/187x217/ff47150545/storyblok.svg","name":"Content with Storyblok","component":"feature","link_text":"Why Storyblok?","description":"CMS done right. API based & Headless with clean and structured JSON for you as developer and a CMS your editors will fall in love with. Unlimited extensibility through custom plugins using VueJs."},{"link":{"id":"daa26172-db21-4026-abd0-8e5d7adf529d","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"logo":"//a.storyblok.com/f/43760/256x256/d78f9d9b8c/netlify.svg","name":"Deploy with Netlify","component":"feature","link_text":"Why Netlify?","description":"Build, deploy, and manage modern web projects. Get an all-in-one workflow that combines global deployment, continuous integration, and HTTPS."}],"component":"grid"}],"component":"page"}
+  // 4. Fill Home content entry with base data from NuxtDoc
+  let res_4 = await instance.get('/stories/', { page: 1 })
+  let homeStory = res_4.data.stories.find((story) => {
+    return story.slug == 'home';
+  });
+  homeStory.path = '/'
+  homeStory.content = {"body":[{"_uid":"43bccb44-f03b-4f06-8515-06b4025bc3d5","title":"NuxtDoc","subtitle":"Create your documentation with NuxtJS + Storyblok","component":"teaser","button_link":{"id":"63f075f9-5f02-4805-a3af-2cb84f5b7aeb","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"button_text":"Get me to the Docs","background_image":"//a.storyblok.com/f/43760/2000x500/3afb2b33d7/nuxtdoc-background.svg"},{"columns":[{"link":{"id":"ef631e21-b771-49f4-a486-69efff85a643","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"logo":"//a.storyblok.com/f/43760/256x189/97266889fd/nuxt.svg","name":"Built with Nuxt","component":"feature","link_text":"Why Nuxt?","description":"Nuxt.js is a framework for creating Universal Vue.js Applications. It presets all the configuration needed to make your development of a Vue.js Application Server Rendered more enjoyable."},{"link":{"id":"4a971857-f1be-4708-b2ae-e401c1f30445","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"logo":"//a.storyblok.com/f/43760/187x217/ff47150545/storyblok.svg","name":"Content with Storyblok","component":"feature","link_text":"Why Storyblok?","description":"CMS done right. API based & Headless with clean and structured JSON for you as developer and a CMS your editors will fall in love with. Unlimited extensibility through custom plugins using VueJs."},{"link":{"id":"daa26172-db21-4026-abd0-8e5d7adf529d","url":"","linktype":"story","fieldtype":"multilink","cached_url":"v1/your-category/first-entry"},"logo":"//a.storyblok.com/f/43760/256x256/d78f9d9b8c/netlify.svg","name":"Deploy with Netlify","component":"feature","link_text":"Why Netlify?","description":"Build, deploy, and manage modern web projects. Get an all-in-one workflow that combines global deployment, continuous integration, and HTTPS."}],"component":"grid"}],"component":"page"}
 
-          return instance.put(`/stories/${homeStory.id}`, { story: homeStory }).then((res_5) => {
-            console.log('Seed: Home Content Entry configured')
+  let res_5 = await instance.put(`/stories/${homeStory.id}`, { story: homeStory }).catch((error) => console.error(error))
+  console.log('Seed: Home Content Entry configured')
 
-            // Configure Space with correct preview Domain
-            return instance.get().then((res_6) => {
-              let data = res_6.data
-              data.space.domain = 'http://localhost:3000/'
+  // 5. Configure Space with correct preview Domain
+  let { data } = await instance.get().catch((error) => console.error(error))
+  data.space.domain = 'http://localhost:3000/'
 
-              return instance.put('/', data).then((update_response) => {
-                console.log('Seed: Space configured')
-                console.log('');
-                console.log('Your preview token is: ' + update_response.data.space.first_token);
-                console.log('Exchange it in your `nuxt.config.js` to continue');
-              }) 
-            })
-          })   
-        })
-      })
-    })
-  })
-  .catch((error) => {
-    console.error(error)
-  })
-
-} else {
-  console.error('Seed: You\'re not logged in. Use the command `storyblok login` to login')
+  let final_result = await instance.put('/', data).catch((error) => console.error(error))
+  console.log('Seed: Space configured')
+  console.log('');
+  console.log('Your preview token is: ' + final_result.data.space.first_token);
+  console.log('Exchange it in your `nuxt.config.js` to continue');
 }
