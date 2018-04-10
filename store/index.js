@@ -38,8 +38,10 @@ const createStore = () => {
     },
     actions: {
       async GET_SITEMAP ({ commit }, context) {
-        const { data } = await context.app.$storyapi.get(`cdn/links`, { starts_with: 'v1', version: 'draft' })
-        commit('SET_SITEMAP', data.links)
+        if (Object.keys(context.store.state.links).length == 0) {
+          const { data } = await context.app.$storyapi.get(`cdn/links`, { starts_with: 'v1', version: 'draft' })
+          commit('SET_SITEMAP', data.links)
+        }
       }
     }
   })
