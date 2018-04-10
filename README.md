@@ -38,6 +38,7 @@ The Getting Started Guide: http://hopeful-hoover-d87dd1.netlify.com/v1/guide/get
 - [x] Add images to the real documentation
 - [x] Feature List
 - [x] Better Teaser Background Image
+- [ ] Switch Header and Sidebar to default layout
 - [ ] Switch from Draft to Published content version
 - [ ] Actually use Cached API Calls
 - [ ] Highlight JS
