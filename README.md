@@ -38,10 +38,10 @@ The Getting Started Guide: http://hopeful-hoover-d87dd1.netlify.com/v1/guide/get
 - [x] Add images to the real documentation
 - [x] Feature List
 - [x] Better Teaser Background Image
-- [] Highlight JS
-- [] More general styles
-- [] Use variable in styles
-- [] Create getting started video
-- [] Multi Version support
-- [] more more more
+- [ ] Highlight JS
+- [ ] More general styles
+- [ ] Use variable in styles
+- [ ] Create getting started video
+- [ ] Multi Version support
+- [ ] more more more
 
