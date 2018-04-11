@@ -1,6 +1,6 @@
 <template>
   <article class="doc" v-editable="blok">
-    <h1 class="docs__title" :id="slug">{{title}}</h1>
+    <h1 class="doc__title" :id="slug">{{title}}</h1>
     <html-content :content="parsed"/>
   </article>
 </template>
@@ -38,18 +38,10 @@ export default {
 </script>
 
 <style lang='scss'>
-.doc__title {
-  margin-top: 0px;
-  font-weight: 300;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #d8d8d8;
-}
-
 .doc {
   max-width: 600px;
   margin: 61px auto 0px auto;
   padding: 40px;
-  margin-left: auto;
 
   @media screen and (min-width: 835px) {
     margin-left: 310px;
@@ -58,5 +50,12 @@ export default {
   @media screen and (min-width: 1300px) {
     margin-left: auto;
   }
+}
+
+.doc__title {
+  margin-top: 0px;
+  font-size: 1.8em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d8d8d8;
 }
 </style>

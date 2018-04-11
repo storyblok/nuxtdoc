@@ -1,13 +1,11 @@
 <template>
-  <div class="docs">
-    <article class="docs__content">
-      <h1 class="docs__title">{{title}}</h1>
-      <div v-bind:key="doc" v-for="doc in docs">
-        <h2><nuxt-link :to="'/' + doc.full_slug">{{doc.name}}</nuxt-link></h2>
-        <html-content :content="markdown(doc.content.summary)"/>
-      </div>
-    </article>
-  </div>
+  <article class="category">
+    <h1 class="category__title">{{title}}</h1>
+    <div v-bind:key="doc" v-for="doc in docs">
+      <h2><nuxt-link :to="'/' + doc.full_slug">{{doc.name}}</nuxt-link></h2>
+      <html-content :content="markdown(doc.content.summary)"/>
+    </div>
+  </article>
 </template>
 
 <script>
@@ -50,27 +48,24 @@ export default {
 </script>
 
 <style lang='scss'>
-.docs {
-  margin-top: 61px;
-}
-
-.docs__title {
-  margin-top: 0px;
-}
-
-.docs__content {
+.category {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 61px auto 0px auto;
   padding: 40px;
-  margin-left: auto;
+
   @media screen and (min-width: 835px) {
     margin-left: 310px;
   }
+
   @media screen and (min-width: 1300px) {
     margin-left: auto;
   }
-  img {
-    max-width: 100%;
-  }
+}
+
+.category__title {
+  margin-top: 0px;
+  font-size: 1.8em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d8d8d8;
 }
 </style>
