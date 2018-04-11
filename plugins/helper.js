@@ -26,7 +26,7 @@ export function checkAndInitEditMode(app) {
   // check if the controlToken is equal to the validation token passed as param
   // and if timestamp is in the lates 60 minutes.
   if (app.$storyblok.getParam(encodeURI('_storyblok_tk[token]')) == controlToken && 
-    app.$storyblok.getParam(encodeURI('_storyblok_tk[timestamp]')) > Date.now() - 3600) { 
+    app.$storyblok.getParam(encodeURI('_storyblok_tk[timestamp]')) > Math.floor(Date.now()/1000)-3600) { 
 
     // here we know it's an valid edit mode so lets initialize it and register events.
     app.$storyblok.init()
