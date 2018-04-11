@@ -20,14 +20,12 @@ export default {
   },
   computed: {
     title() {
-      let title = ''
-      let links = this.$store.state.links
-      Object.keys(links).forEach((key) => {
-        if (links[key].slug == this.$route.path.substr(1)) {
-          title = links[key].name
+      let key = Object.keys(this.$store.state.links).find((key) => {
+        if (this.$store.state.links[key].slug == this.$route.path.substr(1)) {
+          return key
         }
       })
-      return title
+      return this.$store.state.links[key] ? this.$store.state.links[key].name : ''
     }
   },
   methods: {
@@ -40,10 +38,20 @@ export default {
     HTMLContent
   },
   async asyncData (context) {
-    const { data } = await context.app.$storyapi.get(`cdn/stories/`, { 
-        starts_with: `${context.params.version}/${context.params.category}/`,
+    const res = await context.app.$storyapi
+    .get(`cdn/stories/`, { 
+        starts_with: `${context.params.version}/${context.params.category}`,
         version: 'draft' })
-    return { docs: data.stories }
+    .catch((e) => { 
+      context.error({ statusCode: e.response.status, message: e.response.statusText }) 
+    })
+
+    if (!!res) {
+      if (res.data.stories.length <= 0) {
+        return context.error({ statusCode: 404, message: 'Category not found' }) 
+      } 
+      return { docs: res.data.stories }
+    }
   }
 }
 </script>
