@@ -1,6 +1,6 @@
 <template>
-  <article class="doc" v-editable="blok">
-    <h1 class="doc__title" :id="slug">{{title}}</h1>
+  <article class="doc" v-editable="story.content">
+    <h1 class="doc__title" :id="story.slug">{{story.name}}</h1>
     <HTMLContent :content="parsed"/>
   </article>
 </template>
@@ -13,7 +13,7 @@ import { markdown, checkAndInitEditMode } from '@/plugins/helper'
 export default {
   data() {
     return {
-      title: '',
+      story: {},
       parsed: ''
     }
   },
@@ -24,18 +24,21 @@ export default {
     HTMLContent
   },
   async asyncData (context) {
-    const { data } = await context.app.$storyapi.get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
+    const res = await context.app.$storyapi
+    .get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
+    .catch((e) => { 
+      context.error({ statusCode: e.response.status, message: e.response.statusText }) 
+    })
 
-    // prepare data
-    const parsed = markdown(data.story.content.content, '1000x0')
+    if (!!res) {
+      // prepare data
+      const parsed = markdown(res.data.story.content.content, '1000x0')
 
-    // push into store
-    context.store.commit('SET_CURRENT_CONTENT', parsed)
+      // push into store
+      context.store.commit('SET_CURRENT_CONTENT', parsed)
 
-    return { title: data.story.name, 
-             slug: data.story.slug,
-             parsed: parsed,
-             blok: data.story.content }
+      return { story: res.data.story, parsed: parsed }
+    }
   }
 }
 </script>
