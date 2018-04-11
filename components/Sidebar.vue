@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" v-if="currentPage != ''">
+  <div class="sidebar">
     <div class="sidebar__inner" v-bind:key="version.item.id" v-for="version in $store.state.sitemap">
       <nav class="sidebar__category" v-bind:key="category.item.id" v-for="category in version.children">
         <nuxt-link class="sidebar__link sidebar__link--category" :to="'/' + category.item.slug">{{category.item.name}}</nuxt-link>
@@ -8,7 +8,7 @@
           <li v-bind:key="doc.item.id" v-for="doc in category.children">
             <nuxt-link class="sidebar__link sidebar__link--doc" :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
             
-            <ul class="sidebar__subdocs" v-if="doc.item.slug == currentPage && subnav.length > 0">
+            <ul class="sidebar__subdocs" v-if="doc.item.slug == $route.path.substr(1) && subnav.length > 0">
               <li v-bind:key="navitem.id" v-for="navitem in subnav">
                 
                 <nuxt-link class="sidebar__link" :to="navitem.id">{{navitem.text}}</nuxt-link>
@@ -33,9 +33,6 @@ import cheerio from 'cheerio'
 
 export default {
   computed: {
-    currentPage() {
-      return this.$route.path.length >= 0 ? this.$route.path.substr(1) : ''
-    },
     subnav() {
       const $ = cheerio.load(this.$store.state.currentContent)
       let pageNav = []

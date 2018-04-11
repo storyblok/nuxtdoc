@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Header/>
+    <Header v-if="showHeader"/>
     <nuxt/>
-    <Sidebar/>
+    <Sidebar v-if="showSidebar"/>
   </div>
 </template>
 
@@ -11,6 +11,18 @@ import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 
 export default {
+  computed: {
+    currentPage() {
+      console.log(this.$route.path.length >= 0 ? this.$route.path.substr(1) : '');
+      return this.$route.path.length >= 0 ? this.$route.path.substr(1) : ''
+    },
+    showSidebar() {
+      return this.currentPage != ''
+    },
+    showHeader() {
+      return this.currentPage != ''
+    }
+  },
   components: {
     Header,
     Sidebar

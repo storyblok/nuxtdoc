@@ -1,5 +1,5 @@
 <template>
-  <header class="header" v-if="currentPage != ''">
+  <header class="header">
     <nuxt-link class="header__logo" to="/">
       <img src="https://a.storyblok.com/f/43760/256x189/97266889fd/nuxt.svg" alt="NuxtJs">
       <img src="https://a.storyblok.com/f/43760/187x217/ff47150545/storyblok.svg" alt="Storyblok">
@@ -14,16 +14,6 @@
     </nav>
   </header>
 </template>
-
-<script>
-export default {
-  computed: {
-    currentPage() {
-      return this.$route.path.length >= 0 ? this.$route.path.substr(1) : ''
-    }
-  }
-}
-</script>
 
 <style lang='scss'>
 .header {
