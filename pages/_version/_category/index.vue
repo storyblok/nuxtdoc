@@ -42,15 +42,8 @@ export default {
     .get(`cdn/stories/`, { 
         starts_with: `${context.params.version}/${context.params.category}`,
         version: 'draft' })
-    .catch((e) => { 
-      context.error({ statusCode: e.response.status, message: e.response.statusText }) 
-    })
-
-    if (!!res && res.data.stories.length > 0) {
-      return { docs: res.data.stories }
-    } else {
-      context.error({ statusCode: 404, message: 'Category not found' }) 
-    }
+    
+    return { docs: res.data.stories }
   }
 }
 </script>
