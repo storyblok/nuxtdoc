@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style lang='scss'>
+@import '~assets/_variables.scss';
 .link-button {
   position: relative;
   z-index: 1;
@@ -39,24 +40,28 @@ export default {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background: #00b09f;
-  color: #fff;
+  background: $link-button-background;
+  color: $link-button-color;
   transform: translateY(0px);
   transition: transform 200ms ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   &:hover, &:focus {
     text-decoration: none;
-    background-color: lighten(#00b09f, 5%);
+    color: $link-button-hover-color;
+    background-color: $link-button-hover-background;
     transform: translateY(-1px);
     border-bottom: 0px;
   }
 }
 
 .link-button--dark {
-  background: #24292e;
+  background: $link-button-background--dark;
+  color: $link-button-color--dark;
   &:hover, &:focus {
-    background-color: lighten(#24292e, 5%);
+    color: $link-button-hover-color--dark;;
+    background-color: $link-button-hover-background--dark;
   }
 }
 

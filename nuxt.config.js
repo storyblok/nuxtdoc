@@ -41,6 +41,9 @@ module.exports = {
       }
     }
   },
+  css: [
+    '@/assets/_variables.scss'
+  ],
   plugins: [
     '@/plugins/components'
   ],

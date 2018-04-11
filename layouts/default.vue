@@ -29,7 +29,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss'>
+@import '~assets/_variables.scss';
+
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -46,12 +48,15 @@ body {
 }
 
 a { 
-  color: #34495e;
+  color: $link-color;
   text-decoration: none;
   border-bottom: 2px solid transparent;
+  &:hover, &:focus {
+    color: $link-color-hover;
+  }
 }
 
 a:hover {
-  border-bottom: 2px solid #42b983;
+  border-bottom: 2px solid $link-color-hover
 }
 </style>

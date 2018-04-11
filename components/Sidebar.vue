@@ -57,7 +57,9 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
+@import '~assets/_variables.scss';
+
 .sidebar {
   position: fixed;
   z-index: 10;
@@ -84,11 +86,11 @@ export default {
   display: inline-block;
   padding-bottom: 2px;
   margin-bottom: 2px;
-  color: #7f8c8d;
+  color: $sidebar-link-color-inactive;
 
   &.nuxt-link-active {
     font-weight: 600;
-    color: #42b983;
+    color: $sidebar-link-color-active;
   }
 
   &.sidebar__link--doc {
@@ -121,7 +123,7 @@ export default {
   padding-left: 10px;
   font-size: 0.80em;
   .sidebar__link {
-    color: #34495e;
+    color: $sidebar-subnav-link-color-inactive;
   }
   ul {
     padding-left: 10px;

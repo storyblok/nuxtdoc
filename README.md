@@ -6,11 +6,11 @@
 
 ### Full Documentation
 
-Documentation: http://hopeful-hoover-d87dd1.netlify.com
+Documentation: https://nuxtdoc.js.org
 
 ### Getting Started
 
-The Getting Started Guide: http://hopeful-hoover-d87dd1.netlify.com/v1/guide/getting-started
+The Getting Started Guide: https://nuxtdoc.js.rg/v1/guide/getting-started
 
 ### Startpage
 
@@ -38,13 +38,15 @@ The Getting Started Guide: http://hopeful-hoover-d87dd1.netlify.com/v1/guide/get
 - [x] Add images to the real documentation
 - [x] Feature List
 - [x] Better Teaser Background Image
-- [ ] Switch Header and Sidebar to default layout
+- [x] Switch Header and Sidebar to default layout
+- [x] Actually use cached API Calls for Sidebar
+- [x] More general styles
+- [x] Fix Scrollbar issue on 800px - 1300px viewport
+- [ ] Global Configuration in Storyblok for Header
 - [ ] Switch from Draft to Published content version
-- [ ] Actually use Cached API Calls
-- [ ] Highlight JS
-- [ ] More general styles
-- [ ] Use variable in styles
 - [ ] Create getting started video
+- [ ] Use variable in styles
 - [ ] Multi Version support
+- [ ] Highlight JS
 - [ ] more more more
 

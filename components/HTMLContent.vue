@@ -9,18 +9,20 @@ export default {
 </script>
 
 <style lang='scss'>
+@import '~assets/_variables.scss';
+
 .markdown {
   h3, h4, h5, h6 {
-    font-weight: 300;
+    font-weight: $html-content-headline-font-weight;
     &:before {
-      content: '# ';
+      content: $html-content-headline-before;
     }
   }
 
   h2 {
-    font-weight: 300;
+    font-weight: $html-content-headline-font-weight;
     padding-bottom: 10px;
-    border-bottom: 1px solid #d8d8d8;
+    border-bottom: 1px solid $html-content-headline-border-color;
   }
 
   img {
@@ -30,10 +32,11 @@ export default {
 
   a {
     border-bottom: 0px;
-    color: #42b983;
+    color: $html-content-link-color;
     font-weight: 600;
     text-decoration: none;
     &:hover {
+      color: $html-content-link-hover-color;
       text-decoration: underline;
     }
   }
@@ -42,9 +45,10 @@ export default {
     line-height: 1.5;
     code {
       display: inline;
-      background: #f5f5f5;
+      background: $html-content-code-background;
       border-radius: 4px;
-      border: 1px solid #d8d8d8;
+      border: 1px solid $html-content-code-border;
+      font-family: $html-content-code-font-family;
       font-size: 90%;
     }
   }
@@ -53,10 +57,11 @@ export default {
   pre {
     display: block;
     padding: 20px;
-    background: #f5f5f5;
+    background: $html-content-code-background;
     border-radius: 4px;
-    border: 1px solid #d8d8d8;
-    font: 14px Consolas,monospace,serif;
+    border: 1px solid $html-content-code-border;
+    font-size: $html-content-code-font-size;
+    font-family: $html-content-code-font-family;
     color: #444;
     tab-size: 4;
     overflow: auto;
@@ -66,7 +71,7 @@ export default {
     width: 100%;
     border-collapse: collapse;
     th, td {
-      border: 1px solid #d8d8d8;
+      border: 1px solid $html-content-table-border-color;
       padding: 15px;
       text-align: left;
     }

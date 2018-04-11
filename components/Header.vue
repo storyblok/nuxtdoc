@@ -1,9 +1,7 @@
 <template>
   <header class="header">
     <nuxt-link class="header__logo" to="/">
-      <img src="https://a.storyblok.com/f/43760/256x189/97266889fd/nuxt.svg" alt="NuxtJs">
-      <img src="https://a.storyblok.com/f/43760/187x217/ff47150545/storyblok.svg" alt="Storyblok">
-      <img src="https://a.storyblok.com/f/43760/256x256/d78f9d9b8c/netlify.svg" alt="Netlify">
+      <img src="https://a.storyblok.com/f/39898/766x200/643e23f56d/nuxt-doc.svg" alt="NuxtDoc Logo">
     </nuxt-link>
     <nav>
       <ul class="header__nav">
@@ -34,15 +32,15 @@
   justify-content: space-between;
   box-sizing: border-box;
 
-
   @media screen and (min-width: 725px) {
     padding: 10px 60px;
   }
-
- 
 }
 
 .header__logo {
+  &:hover {
+    border-color: #fff;
+  }
   img {
     height: 30px;
     padding-right: 10px;

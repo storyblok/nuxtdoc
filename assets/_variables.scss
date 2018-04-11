@@ -1,0 +1,46 @@
+// Global variables to easily customize without styling
+$primary-color: #00b09f;
+$primary-border-color: #d8d8d8;
+
+// Global Link color
+$link-color: $primary-color;
+$link-color-hover: lighten($link-color, 5%);
+
+// Link Button Colors
+$link-button-background: $primary-color;
+$link-button-color: #fff;
+$link-button-hover-background: lighten($link-button-background, 5%);
+$link-button-hover-color: #fff;
+
+$link-button-background--dark: #24292e;
+$link-button-color--dark: #fff;
+$link-button-hover-background--dark: darken($link-button-background--dark, 5%);
+$link-button-hover-color--dark: #fff;
+
+// Sidebar Link Color overrides
+$sidebar-link-color-inactive: #7f8c8d;
+$sidebar-link-color-active: $link-color;
+$sidebar-subnav-link-color-inactive: #34495e;
+
+// Detail Page Content
+$html-content-headline-font-weight: 300;
+$html-content-headline-before: '# ';
+$html-content-headline-border-color: $primary-border-color;
+$html-content-link-color: $link-color;
+$html-content-link-hover-color: lighten($html-content-link-color, 5%);
+$html-content-code-background: #f5f5f5;
+$html-content-code-border: $primary-border-color;
+$html-content-code-font-family: Consolas, monospace, serif;
+$html-content-code-font-size: 14px;
+$html-content-table-border-color: $primary-border-color;
+
+
+
+
+
+
+
+
+// want to use it in own components?
+// Add: @import '~assets/_variables.scss'; to get access to this file
+// https://github.com/nuxt/nuxt.js/issues/2150#issuecomment-345567930
