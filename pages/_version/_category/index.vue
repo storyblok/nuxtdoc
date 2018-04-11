@@ -4,7 +4,7 @@
       <h1 class="docs__title">{{title}}</h1>
       <div v-bind:key="doc" v-for="doc in docs">
         <h2><nuxt-link :to="'/' + doc.full_slug">{{doc.name}}</nuxt-link></h2>
-        <div v-html="markdown(doc.content.summary)"></div>
+        <html-content :content="markdown(doc.content.summary)"/>
       </div>
     </article>
   </div>
@@ -17,7 +17,6 @@ import { checkAndInitEditMode } from '@/plugins/helper'
 export default {
   data() {
     return {
-      currentPage: '',
       docs: []
     }
   },
@@ -26,7 +25,7 @@ export default {
       let title = ''
       let links = this.$store.state.links
       Object.keys(links).forEach((key) => {
-        if (links[key].slug == this.currentPage) {
+        if (links[key].slug == this.$route.path.substr(1)) {
           title = links[key].name
         }
       })
@@ -45,8 +44,7 @@ export default {
     const { data } = await context.app.$storyapi.get(`cdn/stories/`, { 
         starts_with: `${context.params.version}/${context.params.category}/`,
         version: 'draft' })
-    return { docs: data.stories, 
-             currentPage: `${context.params.version}/${context.params.category}` }
+    return { docs: data.stories }
   }
 }
 </script>
