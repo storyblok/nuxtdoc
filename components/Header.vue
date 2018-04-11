@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" v-if="currentPage != ''">
     <nuxt-link class="header__logo" to="/">
       <img src="http://a.storyblok.com/f/43760/256x189/97266889fd/nuxt.svg" alt="NuxtJs">
       <img src="http://a.storyblok.com/f/43760/187x217/ff47150545/storyblok.svg" alt="Storyblok">
@@ -15,11 +15,23 @@
   </header>
 </template>
 
+<script>
+export default {
+  computed: {
+    currentPage() {
+      return this.$route.path.length >= 0 ? this.$route.path.substr(1) : ''
+    }
+  }
+}
+</script>
+
 <style lang='scss'>
 .header {
   background-color: #fff;
   padding: 10px 40px;
-  position: relative;
+  position: fixed;
+  width: 100%;
+  top: 0;
   z-index: 100;
   height: 60px;
   line-height: 40px;
@@ -32,15 +44,12 @@
   justify-content: space-between;
   box-sizing: border-box;
 
+
   @media screen and (min-width: 725px) {
     padding: 10px 60px;
   }
 
-  .docs & {
-    position: fixed;
-    width: 100%;
-    top: 0;
-  }
+ 
 }
 
 .header__logo {

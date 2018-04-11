@@ -5,11 +5,15 @@ const createStore = () => {
     state: {
       version: 'v1',
       sitemap: {},
-      links: {}
+      links: {},
+      currentContent: ''
     },
     mutations: {
      SET_VERSION(state, version) {
       state.version = version
+     },
+     SET_CURRENT_CONTENT(state, currentContent) {
+      state.currentContent = currentContent
      },
      async SET_SITEMAP (state, links) {
         const generateTree = (parent, items) => {

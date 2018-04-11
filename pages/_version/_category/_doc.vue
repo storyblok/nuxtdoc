@@ -4,44 +4,36 @@
       <h1 class="docs__title" :id="slug">{{title}}</h1>
       <div v-html="parsed"></div>
     </article>
-
-    <Header/>
-    <Sidebar :currentPage="full_slug" :pageNavigation="parsed"/>
-    
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
+
 import marked from 'marked'
 import { resizeImages, checkAndInitEditMode } from '@/plugins/helper'
 
 export default {
   data() {
     return {
-      content: '',
-      title: ''
+      title: '',
+      parsed: ''
     }
-  },
-  computed: {
-    parsed() {
-      return marked(resizeImages(this.content, '1000x0'))
-    }
-  },
-  components: {
-    Header,
-    Sidebar
   },
   mounted () {
     checkAndInitEditMode(this)
   },
   async asyncData (context) {
     const { data } = await context.app.$storyapi.get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
+
+    // prepare data
+    const parsed = marked(resizeImages(data.story.content.content, '1000x0'))
+
+    // push into store
+    context.store.commit('SET_CURRENT_CONTENT', parsed)
+
     return { title: data.story.name, 
              slug: data.story.slug,
-             full_slug: data.story.full_slug,
-             content: data.story.content.content,
+             parsed: parsed,
              blok: data.story.content }
   }
 }

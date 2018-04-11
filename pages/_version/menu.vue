@@ -1,31 +1,18 @@
 <template>
-  <div>
-    <Header/>
-    <div class="menu">  
-      <div class="menu__inner" v-bind:key="version.item.id" v-for="version in $store.state.sitemap">
-        Version: {{version.item.name}}
-        <nav class="menu__category" v-bind:key="category.item.id" v-for="category in version.children">
-          <nuxt-link class="menu__link menu__link--category" :to="'/' + category.item.slug">{{category.item.name}}</nuxt-link>
-          <ul class="menu__docs">
-            <li v-bind:key="doc.item.id" v-for="doc in category.children">
-              <nuxt-link class="menu__link menu__link--doc" :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+  <div class="menu">  
+    <div class="menu__inner" v-bind:key="version.item.id" v-for="version in $store.state.sitemap">
+      Version: {{version.item.name}}
+      <nav class="menu__category" v-bind:key="category.item.id" v-for="category in version.children">
+        <nuxt-link class="menu__link menu__link--category" :to="'/' + category.item.slug">{{category.item.name}}</nuxt-link>
+        <ul class="menu__docs">
+          <li v-bind:key="doc.item.id" v-for="doc in category.children">
+            <nuxt-link class="menu__link menu__link--doc" :to="'/' + doc.item.slug">{{doc.item.name}}</nuxt-link>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
-
-<script>
-import Header from '@/components/Header'
-
-export default {
-  components: {
-    Header
-  }
-}
-</script>
 
 <style lang='scss'>
 .menu {

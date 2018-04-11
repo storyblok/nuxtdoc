@@ -7,16 +7,10 @@
         <div v-html="markdown(doc.content.summary)"></div>
       </div>
     </article>
-
-    <Header/>
-    <Sidebar :currentPage="currentPage" />
-  
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
 import marked from 'marked'
 import { checkAndInitEditMode } from '@/plugins/helper'
 
@@ -38,10 +32,6 @@ export default {
       })
       return title
     }
-  },
-  components: {
-    Header,
-    Sidebar
   },
   mounted () {
     checkAndInitEditMode(this)
