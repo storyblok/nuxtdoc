@@ -1,16 +1,16 @@
 <template>
   <article class="category">
     <h1 class="category__title">{{title}}</h1>
-    <div v-bind:key="doc" v-for="doc in docs">
+    <div v-bind:key="doc.id" v-for="doc in docs">
       <h2><nuxt-link :to="'/' + doc.full_slug">{{doc.name}}</nuxt-link></h2>
-      <html-content :content="markdown(doc.content.summary)"/>
+      <HTMLContent :content="markdown(doc.content.summary)"/>
     </div>
   </article>
 </template>
 
 <script>
-import marked from 'marked'
-import { checkAndInitEditMode } from '@/plugins/helper'
+import HTMLContent from '@/components/HTMLContent'
+import { checkAndInitEditMode, markdown } from '@/plugins/helper'
 
 export default {
   data() {
@@ -30,13 +30,14 @@ export default {
       return title
     }
   },
+  methods: {
+    markdown: (string) => markdown(string, '1000x0')
+  },
   mounted () {
     checkAndInitEditMode(this)
   },
-  methods: {
-    markdown(string) {
-      return marked(string || '')
-    }
+  components: {
+    HTMLContent
   },
   async asyncData (context) {
     const { data } = await context.app.$storyapi.get(`cdn/stories/`, { 

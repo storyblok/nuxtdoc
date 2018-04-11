@@ -1,14 +1,14 @@
 <template>
   <article class="doc" v-editable="blok">
     <h1 class="doc__title" :id="slug">{{title}}</h1>
-    <html-content :content="parsed"/>
+    <HTMLContent :content="parsed"/>
   </article>
 </template>
 
 <script>
-
 import marked from 'marked'
-import { resizeImages, checkAndInitEditMode } from '@/plugins/helper'
+import HTMLContent from '@/components/HTMLContent.vue'
+import { markdown, checkAndInitEditMode } from '@/plugins/helper'
 
 export default {
   data() {
@@ -20,11 +20,14 @@ export default {
   mounted () {
     checkAndInitEditMode(this)
   },
+  components: {
+    HTMLContent
+  },
   async asyncData (context) {
     const { data } = await context.app.$storyapi.get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
 
     // prepare data
-    const parsed = marked(resizeImages(data.story.content.content, '1000x0'))
+    const parsed = markdown(data.story.content.content, '1000x0')
 
     // push into store
     context.store.commit('SET_CURRENT_CONTENT', parsed)
