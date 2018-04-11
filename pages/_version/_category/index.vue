@@ -49,7 +49,7 @@ export default {
     if (!!res && res.data.stories.length > 0) {
       return { docs: res.data.stories }
     } else {
-      return context.error({ statusCode: 404, message: 'Category not found' }) 
+      context.error({ statusCode: 404, message: 'Category not found' }) 
     }
   }
 }
