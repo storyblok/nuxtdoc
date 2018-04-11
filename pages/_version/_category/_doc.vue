@@ -41,9 +41,6 @@ export default {
       })
     }
   },
-  async fetch (context) {
-    await context.store.dispatch('GET_SITEMAP', context)
-  },
   async asyncData (context) {
     const { data } = await context.app.$storyapi.get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
     return { title: data.story.name, 

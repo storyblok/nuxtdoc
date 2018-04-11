@@ -23,6 +23,7 @@ module.exports = {
   ** Build configuration
   */
   router: {
+    middleware: 'navigation-loader',
     scrollBehavior(to, from, savedPosition) {
       if (savedPosition) {
         return savedPosition

@@ -23,9 +23,6 @@ import Header from '@/components/Header'
 export default {
   components: {
     Header
-  },
-  async fetch (context) {
-    await context.store.dispatch('GET_SITEMAP', context)
   }
 }
 </script>
