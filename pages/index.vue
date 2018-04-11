@@ -5,17 +5,14 @@
 </template>
 
 <script>
+import { checkAndInitEditMode } from '@/plugins/helper'
+
 export default {
   data () {
     return { story: { content: {} } }
   },
   mounted () {
-    if (this.$storyblok.inEditor) {
-      this.$storyblok.init()
-      this.$storyblok.on('change', () => {
-        location.reload(true)
-      })
-    }
+    checkAndInitEditMode(this)
   },
   async asyncData (context) {
     const { data } = await context.app.$storyapi.get(`cdn/stories/home`, { version: 'draft' })

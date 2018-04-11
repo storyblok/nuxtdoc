@@ -14,6 +14,7 @@
     "deploy": "nuxt generate && netlify deploy"
   },
   "dependencies": {
+    "crypto": "^1.0.1",
     "nuxt": "^1.0.0",
     "storyblok-nuxt": "0.0.3"
   },

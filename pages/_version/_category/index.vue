@@ -18,6 +18,7 @@
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import marked from 'marked'
+import { checkAndInitEditMode } from '@/plugins/helper'
 
 export default {
   data() {
@@ -43,12 +44,7 @@ export default {
     Sidebar
   },
   mounted () {
-    if (this.$storyblok.inEditor) {
-      this.$storyblok.init()
-      this.$storyblok.on('change', () => {
-        location.reload(true)
-      })
-    }
+    checkAndInitEditMode(this)
   },
   methods: {
     markdown(string) {

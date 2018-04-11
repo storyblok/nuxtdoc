@@ -15,7 +15,7 @@
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import marked from 'marked'
-import { resizeImages } from '@/plugins/helper'
+import { resizeImages, checkAndInitEditMode } from '@/plugins/helper'
 
 export default {
   data() {
@@ -34,12 +34,7 @@ export default {
     Sidebar
   },
   mounted () {
-    if (this.$storyblok.inEditor) {
-      this.$storyblok.init()
-      this.$storyblok.on('change', () => {
-        location.reload(true)
-      })
-    }
+    checkAndInitEditMode(this)
   },
   async asyncData (context) {
     const { data } = await context.app.$storyapi.get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
