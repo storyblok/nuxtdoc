@@ -46,11 +46,10 @@ export default {
       context.error({ statusCode: e.response.status, message: e.response.statusText }) 
     })
 
-    if (!!res) {
-      if (res.data.stories.length <= 0) {
-        return context.error({ statusCode: 404, message: 'Category not found' }) 
-      } 
+    if (!!res && res.data.stories.length > 0) {
       return { docs: res.data.stories }
+    } else {
+      return context.error({ statusCode: 404, message: 'Category not found' }) 
     }
   }
 }
