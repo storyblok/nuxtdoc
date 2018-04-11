@@ -54,7 +54,10 @@ module.exports = {
       const version = `draft`
       
       let page = 1
-      let routes = []
+      let routes = [
+        '/',
+        'v1/menu'
+      ]
 
       // Call first Page of the Links API: https://www.storyblok.com/docs/Delivery-Api/Links
       axios.get(`https://api.storyblok.com/v1/cdn/links?token=${token}&version=${version}&per_page=${per_page}&page=${page}`).then((res) => {

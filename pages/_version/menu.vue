@@ -17,6 +17,7 @@
 <style lang='scss'>
 .menu {
   margin: 0 auto;
+  margin-top: 61px;
   max-width: 600px;
 
   ul, li {
