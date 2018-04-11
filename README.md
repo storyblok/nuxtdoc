@@ -42,11 +42,12 @@ The Getting Started Guide: https://nuxtdoc.js.rg/v1/guide/getting-started
 - [x] Actually use cached API Calls for Sidebar
 - [x] More general styles
 - [x] Fix Scrollbar issue on 800px - 1300px viewport
+- [x] Use variable in styles
+- [ ] Full Multi Version Support
+- [ ] Add Multi Language Support
 - [ ] Global Configuration in Storyblok for Header
-- [ ] Switch from Draft to Published content version
+- [ ] On Generate: Switch from Draft to Published content version
 - [ ] Create getting started video
-- [ ] Use variable in styles
-- [ ] Multi Version support
 - [ ] Highlight JS
 - [ ] more more more
 
