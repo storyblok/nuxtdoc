@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "crypto": "^1.0.1",
+    "marked": "^0.3.19",
     "nuxt": "^1.0.0",
     "storyblok-nuxt": "0.0.3"
   },
@@ -26,7 +27,6 @@
     "eslint-loader": "^1.7.1",
     "eslint-plugin-vue": "^4.0.0",
     "netrc": "^0.1.4",
-    "marked": "^0.3.19",
     "node-sass": "^4.8.3",
     "sass-loader": "^6.0.7"
   }
