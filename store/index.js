@@ -6,7 +6,8 @@ const createStore = () => {
       version: 'v1',
       sitemap: {},
       links: {},
-      currentContent: ''
+      currentContent: '',
+      clippyAgent: null
     },
     mutations: {
      SET_VERSION(state, version) {
@@ -14,6 +15,9 @@ const createStore = () => {
      },
      SET_CURRENT_CONTENT(state, currentContent) {
       state.currentContent = currentContent
+     },
+     SET_CLIPPY_AGENT(state, clippyAgent) {
+      state.clippyAgent = clippyAgent
      },
      async SET_SITEMAP (state, links) {
         const generateTree = (parent, items) => {

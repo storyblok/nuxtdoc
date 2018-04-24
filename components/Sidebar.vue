@@ -25,6 +25,17 @@
         </ul>
       </nav>
     </div>
+
+    <div class="sidebar__inner">
+      <div class="sidebar__category">
+        <button class="clippy-button" v-if="allowMore" @click="help">Need help?</button>
+        <button class="clippy-button" v-if="allowMoreHelp" @click="moreHelp">You actually do need help?</button>
+        <button class="clippy-button clippy-button--dark" v-if="allowForgetIt" @click="forgetIt">Forget it...</button>
+        <button class="clippy-button clippy-button--dark" v-if="allowYouToo" @click="youToo">YOU TOO!</button>
+        <button class="clippy-button clippy-button--invisible" v-if="allowEnd" @click="end">now</button>
+      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -32,6 +43,17 @@
 import cheerio from 'cheerio'
 
 export default {
+  data() {
+    return {
+      allowMore: true,
+      allowMoreHelp: false,
+      allowForgetIt: false,
+      allowYouToo: false,
+      merlin: null,
+      rover: null,
+      links: null
+    }
+  },
   computed: {
     subnav() {
       const $ = cheerio.load(this.$store.state.currentContent)
@@ -53,12 +75,120 @@ export default {
       })
       return pageNav
     }
+  },
+  methods: {
+    help() {
+      this.$store.state.clippyAgent.moveTo(300,800)
+      this.$store.state.clippyAgent.speak(`You need help?`)
+      this.$store.state.clippyAgent.speak(`Give me a second!`)
+      this.$store.state.clippyAgent.play(`SendMail`)
+      this.$store.state.clippyAgent.speak(`Nope didn't find help, sorry!`)
+      this.$store.state.clippyAgent.play('IdleSnooze')
+      setTimeout( () => {
+        this.allowMore = false
+        this.allowMoreHelp = true
+        this.$store.state.clippyAgent.play('GestureRight')
+      }, 15000)
+    },
+    moreHelp() {
+      clippy.load('Merlin', (agent) => {
+        this.merlin = agent
+        agent.show()
+        agent.moveTo(450,800)
+        agent.play('Greeting')
+        agent.speak(`We can't help you either.`)
+
+      })
+      setTimeout(() => {
+        clippy.load('Rover', (agent) => {
+          this.rover = agent
+          agent.show()
+          agent.moveTo(650,800)
+          agent.play('Greeting')
+          agent.speak(`But we hope you liked this demo`)
+        })
+
+        setTimeout(() => {
+          clippy.load('Links', (agent) => {
+            this.links = agent
+            agent.show()
+            agent.moveTo(850,800)
+            agent.play('Greeting')
+            agent.speak(`If not - well, there is still beer!`)
+          })
+
+          this.allowMoreHelp = false
+          this.allowForgetIt = true
+        }, 6000)
+      }, 6000)
+    },
+    forgetIt() {
+      this.merlin.play('GoodBye')
+      this.merlin.hide()
+      this.rover.play('GoodBye')
+      this.rover.hide()
+      this.links.speak('At least we tried guys')
+      this.links.play('GoodBye')
+      setTimeout(() => {
+        this.links.hide()
+      }, 1000)
+
+      this.allowForgetIt = false
+      this.allowYouToo = true
+    },
+    youToo() {
+      this.$store.state.clippyAgent.speak(`You want me to leave?`)
+      setTimeout( () => {
+        this.$store.state.clippyAgent.speak(`I don't think so`)
+        this.$store.state.clippyAgent.play('IdleSnooze')
+        this.allowYouToo = false
+        this.allowEnd = true
+      }, 2000)
+    },
+    end() {
+      this.$store.state.clippyAgent.speak(`Did he say pizza?`)
+      setTimeout( () => {
+        this.$store.state.clippyAgent.play('Thinking')
+        setTimeout( () => {
+          this.$store.state.clippyAgent.speak(`Okay okay - I'm out`)
+          this.$store.state.clippyAgent.play('GoodBye')
+        }, 5000)
+      }, 2000)
+    }
   }
 }
 </script>
 
 <style lang='scss'>
 @import '~assets/_variables.scss';
+
+.clippy-button {
+  display: block;
+  font-size: inherit;
+  border: 0px;
+  background: $primary-color;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background: $link-button-hover-background;
+  }
+}
+
+.clippy-button--dark {
+  background: $link-button-background--dark;
+  &:hover {
+    background: $link-button-hover-background--dark;
+  }
+}
+
+.clippy-button--invisible {
+  background: rgba(0,0,0,0.03);
+  &:hover {
+    background: rgba(0,0,0,0.03);
+  }
+}
 
 .sidebar {
   position: fixed;

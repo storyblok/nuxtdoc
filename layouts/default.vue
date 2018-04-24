@@ -3,12 +3,14 @@
     <Header v-if="showHeader"/>
     <nuxt/>
     <Sidebar v-if="showSidebar"/>
+    <Clippy/>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
+import Clippy from '@/components/Clippy'
 
 export default {
   computed: {
@@ -24,7 +26,8 @@ export default {
   },
   components: {
     Header,
-    Sidebar
+    Sidebar,
+    Clippy
   },
 }
 </script>
