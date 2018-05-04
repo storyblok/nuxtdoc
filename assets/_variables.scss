@@ -24,7 +24,6 @@ $sidebar-subnav-link-color-inactive: #34495e;
 
 // Detail Page Content
 $html-content-headline-font-weight: 300;
-$html-content-headline-before: '# ';
 $html-content-headline-border-color: $primary-border-color;
 $html-content-link-color: $link-color;
 $html-content-link-hover-color: lighten($html-content-link-color, 5%);
@@ -32,7 +31,10 @@ $html-content-code-background: #f5f5f5;
 $html-content-code-border: $primary-border-color;
 $html-content-code-font-family: Consolas, monospace, serif;
 $html-content-code-font-size: 14px;
+$html-content-code-color: #444;
 $html-content-table-border-color: $primary-border-color;
+$html-content-quote-background: #f5f5f5;
+$html-content-quote-color: #444;
 
 
 

@@ -15,7 +15,11 @@ export default {
     checkAndInitEditMode(this)
   },
   async asyncData (context) {
-    const { data } = await context.app.$storyapi.get(`cdn/stories/home`, { version: 'draft' })
+    const { data } = await context.app.$storyapi.get(`cdn/stories/home`, 
+      { version: context.isDev ? 'draft' : 'published', 
+        cv: context.store.state.cache_version  
+      })
+    
     return { story: data.story }
   }
 }

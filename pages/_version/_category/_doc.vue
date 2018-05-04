@@ -25,7 +25,10 @@ export default {
   },
   async asyncData (context) {
     const res = await context.app.$storyapi
-    .get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, { version: 'draft' })
+    .get(`cdn/stories/${context.params.version}/${context.params.category}/${context.params.doc}`, 
+      { version: context.isDev ? 'draft' : 'published', 
+        cv: context.store.state.cache_version  
+      })
     .catch((e) => { 
       context.error({ statusCode: e.response.status, message: e.response.statusText }) 
     })
