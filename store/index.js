@@ -6,7 +6,8 @@ const createStore = () => {
       version: 'v1',
       sitemap: {},
       links: {},
-      currentContent: ''
+      currentContent: '',
+      cache_version: 0
     },
     mutations: {
      SET_VERSION(state, version) {
@@ -38,6 +39,9 @@ const createStore = () => {
 
         state.sitemap = generateTree(Object.keys(items)[0], items)
         state.links = links
+      },
+      async SET_CACHE_VERSION(state, cache_version) {
+        state.cache_version = cache_version
       }
     },
     actions: {
@@ -45,6 +49,14 @@ const createStore = () => {
         if (Object.keys(context.store.state.links).length == 0) {
           const { data } = await context.app.$storyapi.get(`cdn/links`, { starts_with: 'v1', version: 'draft' })
           commit('SET_SITEMAP', data.links)
+        }
+      },
+      async GET_CACHE_VERSION ({ commit }, context) {
+        if (context.store.state.cache_version == 0) {
+          // initial cache version call to improve further requests
+          // since they now only hit the CDN.
+          const { data } = await context.app.$storyapi.get(`cdn/spaces/me`)
+          commit('SET_CACHE_VERSION', data.space.version)
         }
       }
     }

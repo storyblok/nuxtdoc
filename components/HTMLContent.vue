@@ -14,9 +14,6 @@ export default {
 .markdown {
   h3, h4, h5, h6 {
     font-weight: $html-content-headline-font-weight;
-    &:before {
-      content: $html-content-headline-before;
-    }
   }
 
   h2 {
@@ -62,7 +59,7 @@ export default {
     border: 1px solid $html-content-code-border;
     font-size: $html-content-code-font-size;
     font-family: $html-content-code-font-family;
-    color: #444;
+    color: $html-content-code-color;
     tab-size: 4;
     overflow: auto;
   }
@@ -79,6 +76,28 @@ export default {
 
   iframe {
     max-width: 100%;
+  }
+
+  blockquote {
+    background: $html-content-quote-background;
+    color: $html-content-quote-color;
+    margin: 0;
+    padding: 10px 0px;
+    border: 0px;
+    border-left: 10px;    
+    border-style: solid;
+    border-color: darken($html-content-quote-background, 10%);
+    p {
+      margin: 0;
+      padding-left: 10px;
+    }
+  }
+
+  li {
+    ul, ol {
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
   }
 }
 </style>

@@ -41,7 +41,8 @@ export default {
     const res = await context.app.$storyapi
     .get(`cdn/stories/`, { 
         starts_with: `${context.params.version}/${context.params.category}`,
-        version: 'draft' })
+        version: context.isDev ? 'draft' : 'published',
+        cv: context.store.state.cache_version })
     
     return { docs: res.data.stories }
   }
