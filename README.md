@@ -10,7 +10,7 @@ Documentation: https://nuxtdoc.js.org
 
 ### Getting Started
 
-The Getting Started Guide: https://nuxtdoc.js.rg/v1/guide/getting-started
+The Getting Started Guide: https://nuxtdoc.js.org/v1/guide/getting-started
 
 ### Startpage
 
