@@ -73,14 +73,14 @@ module.exports = {
             page
           }).then(res => {
             let links = Object.values(res.data.links)
-            results.push(...links);
+            results.push(...links)
             count += links.length
 
             if (count !== res.total && page <= Math.ceil(res.total / res.perPage)) {
-              return getItems(page + 1);
+              return getItems(page + 1)
             }
           })
-      };
+      }
 
       return getItems()
         .then(() => {
