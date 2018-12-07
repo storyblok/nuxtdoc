@@ -14,18 +14,12 @@
     "deploy": "nuxt generate && netlify deploy"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
     "marked": "^0.3.19",
-    "nuxt": "^1.0.0",
-    "storyblok-nuxt": "0.0.3"
+    "nuxt": "^2.0.0",
+    "storyblok-nuxt": "1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
     "cheerio": "^1.0.0-rc.2",
-    "eslint": "^4.15.0",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.5.0",
     "netrc": "^0.1.4",
     "node-sass": "^4.9.0",
     "sass-loader": "^6.0.7"

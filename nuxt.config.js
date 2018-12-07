@@ -1,4 +1,7 @@
-const axios = require('axios')
+const StoryblokClient = require('storyblok-js-client')
+
+// !!! Change to your Storyblok preview token
+const StoryblokToken = 'R5hUgUB9PGoRq2XwtYw14wtt'
 
 module.exports = {
   /*
@@ -51,73 +54,46 @@ module.exports = {
     ['storyblok-nuxt', {accessToken: 'R5hUgUB9PGoRq2XwtYw14wtt', cacheProvider: 'memory'}]
   ],
   generate: {
-    routes: function (callback) {
-      const token = `R5hUgUB9PGoRq2XwtYw14wtt`
-      const per_page = 100
-      const version = 'published'
-      let cache_version = 0
-      
+    routes() {
+      const client = new StoryblokClient({
+        accessToken: StoryblokToken
+      })
+
       let page = 1
       let routes = [
-        'v1/menu'
+        '/v1/menu'
       ]
+      let results = []
+      let count = 0
+      let version = 'published'
 
-      // Load space and receive latest cache version key to improve performance
-      axios.get(`https://api.storyblok.com/v1/cdn/spaces/me?token=${token}`).then((space_res) => {
+      const getItems = (page = 1) => {
+        return client.get('cdn/links', {
+            version,
+            page
+          }).then(res => {
+            let links = Object.values(res.data.links)
+            results.push(...links);
+            count += links.length
 
-        // timestamp of latest publish
-        cache_version = space_res.data.space.version
-      
-        // Call first Page of the Links API: https://www.storyblok.com/docs/Delivery-Api/Links
-        axios.get(`https://api.storyblok.com/v1/cdn/links?token=${token}&version=${version}&per_page=${per_page}&page=${page}&cv=${cache_version}`).then((res) => {
-          Object.keys(res.data.links).forEach((key) => {
-            if (res.data.links[key].slug != 'home') {
-              routes.push('/' + res.data.links[key].slug)
+            if (count !== res.total && page <= Math.ceil(res.total / res.perPage)) {
+              return getItems(page + 1);
             }
           })
+      };
 
-          // Check if there are more pages available otherwise execute callback with current routes.
-          const total = res.headers.total
-          const maxPage = Math.ceil(total / per_page)
-          if(maxPage <= 1) {
-            callback(null, routes)
-          }
-
-          // Since we know the total we now can pregenerate all requests we need to get all Links
-          let contentRequests = [] 
-          for (let page = 2; page <= maxPage; page++) {
-            contentRequests.push(axios.get(`https://api.storyblok.com/v1/cdn/links?token=${token}&version=${version}&per_page=${per_page}&page=${page}`))
-          }
-
-          // Axios allows us to exectue all requests using axios.spread we will than generate our routes and execute the callback
-          axios.all(contentRequests).then(axios.spread((...responses) => {
-            responses.forEach((response) => {
-              Object.keys(response.data.links).forEach((key) => {
-                if (response.data.links[key].slug != 'home') {
-                  routes.push('/' + response.data.links[key].slug)
-                }
-              })
-            })
-          
-            callback(null, routes)
-          })).catch(callback)
+      return getItems()
+        .then(() => {
+          results.forEach((link) => {
+            routes.push('/' + (link.slug == 'home' ? '' : link.slug))
+          })
+          return routes
         })
-      }) 
     }
   },
   build: {
-    /*
-    ** Run ESLint on save
-    */
     extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
+
     }
   }
 }
